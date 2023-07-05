@@ -16,13 +16,13 @@ clustering.
 if __name__ == '__main__':
 
     # load true labels
-    true_labels = pd.read_csv('C:/Users/floor/OneDrive/Documents/MDICC/data/LIHC/label.csv')
+    true_labels = pd.read_csv('your_path/label.csv')
     true_labels = true_labels['class1'].tolist()
     true_labels = np.array(true_labels)
 
     # load test labels
     test_label = []
-    test_label = np.loadtxt("C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/lihc/full_clust_lihc_fsvt.txt")[:, :]
+    test_label = np.loadtxt("your_path/full_clust_TYPE_FS.txt")[:, :]
 
     ari_scores = []
     nmi_scores = []
@@ -60,5 +60,5 @@ if __name__ == '__main__':
         nmi_scores.append(NMI)
 
     # write scores to .csv file
-    np.savetxt("C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/kirc/ari_scores_kirc_fsvt.csv", ari_scores, delimiter=", ")
-    np.savetxt("C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/kirc/nmi_scores_kirc_fsvt.csv", nmi_scores, delimiter=", ")
+    np.savetxt("your_path/ari_scores_TYPE_FS.csv", ari_scores, delimiter=", ")
+    np.savetxt("your_path/nmi_scores_TYPE_FS.csv", nmi_scores, delimiter=", ")

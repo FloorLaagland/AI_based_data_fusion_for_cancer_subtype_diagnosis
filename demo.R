@@ -1,19 +1,19 @@
-source('C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/NetworkFusion.R')
+source('your_path/NetworkFusion.R')
 library(Rcpp)
 library(parallel)
 library(Matrix)
 
-setwd("C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main")
+setwd("your_path/MDICC-main")
 dyn.load("projsplx_R.dll")
 
 # connect anaconda environment
 library(reticulate)
-use_virtualenv("C:\\Users\\floor\\OneDrive\\Documents\\MDICC\\MDICC-main\\MDICC-main\\MDICCenv")
-Sys.setenv(RETICULATE_PYTHON="C:\\Users\\floor\\OneDrive\\Documents\\MDICC\\MDICC-main\\MDICC-main\\MDICCenv\\Scripts\\python.exe", required=TRUE)
-use_python("C:\\Users\\floor\\OneDrive\\Documents\\MDICC\\MDICC-main\\MDICC-main\\MDICCenv\\Scripts\\python.exe", required=TRUE)
+use_virtualenv("your_path\\MDICCenv")
+Sys.setenv(RETICULATE_PYTHON="your_path\\python.exe", required=TRUE)
+use_python("your_path\\python.exe", required=TRUE)
 py_config()
 py_available()
-setwd("C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main")
+setwd("your_path/MDICC-main")
 
 # connect Python scripts
 source_python("LocalAffinityMatrix.py")
@@ -21,7 +21,7 @@ source_python("score.py")
 source_python("label.py")
 
 # read data
-setwd("C:/Users/floor/OneDrive/Documents/MDICC/data/KIRC/data_fs") # data path
+setwd("your_path/data_fs") # data path
 list <- list.files()
 data <- data.frame()
 data1 <- list()
@@ -59,10 +59,10 @@ test_S = as.matrix(test)
 
 # calculate affinity matrix of fused network
 aff_test_S = testaff(test_S, k1) # used for DS clustering
-write.csv(aff_test_S,file="C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/kirc/afffus_kirc_fsk.csv")
+write.csv(aff_test_S,file="your_path/afffus_TYPE_FS.csv")
 
 # result
-score = MDICCscore(test_S,k3,'C:/Users/floor/OneDrive/Documents/MDICC/data/KIRC/label.csv', 'class1') # label path
+score = MDICCscore(test_S,k3,'your_path/label.csv', 'class1') # label path
 names(score) = c('RI','ARI','NMI','Accu','F1')
 label = MDICClabel(test_S,k3)
 MDICCresult = list()
@@ -70,5 +70,5 @@ MDICCresult[['score']] = score
 MDICCresult[['label']] = label
 MDICCresult[['score']] # show scores
 MDICCresult[['label']] # show labels
-write.csv(MDICCresult[['label']],file="C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/kirc/featureselection/labels_km_kirc_k.csv")
-write.csv(MDICCresult[['score']],file="C:/Users/floor/OneDrive/Documents/MDICC/MDICC-main/MDICC-main/kirc/featureselection/scores_km_kirc_k.csv")
+write.csv(MDICCresult[['label']],file="your_path/labels_km_TYPE_FS.csv")
+write.csv(MDICCresult[['score']],file="your_path/scores_km_TYPE_FS.csv")

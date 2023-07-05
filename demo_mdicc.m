@@ -5,7 +5,7 @@ clc
 
 %% Create the edge-weighted graph (affinity matrix)
 
-A = readmatrix('C:\Users\floor\OneDrive\Documents\MDICC\MDICC-main\MDICC-main\lihc\afffus_lihc_fsvt.csv'); 
+A = readmatrix('your_path\afffus_lihc_fsvt.csv'); 
 A=A.*not(eye(size(A))); % the graph should not have self−loops
 A = A(2:size(A,1), 2:size(A,2));
 
@@ -30,4 +30,4 @@ for p = 0.0001:0.0001:0.04
 end
 
 % save all clusterings in a .txt file
-writematrix(C,'C:\Users\floor\OneDrive\Documents\MDICC\MDICC-main\MDICC-main\lihc\full_clust_lihc_fsvt.txt','Delimiter','space')
+writematrix(C,'your_path\full_clust_lihc_fsvt.txt','Delimiter','space')
